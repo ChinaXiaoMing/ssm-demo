@@ -23,6 +23,8 @@ Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org
 ## 开发工具
 - IntelliJ IDEA：开发IDE
 - Git：版本管理
+- Maven 项目构建工具
+- Tomcat 容器服务器
 
 ## 本地开发运行部署
 下载zip直接解压或安装git后执行克隆命令 `git clone https://github.com/ChinaXiaoMing/ssm-demo.git`<br/>
