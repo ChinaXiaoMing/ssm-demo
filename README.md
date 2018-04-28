@@ -17,6 +17,7 @@ Spring Framework | 容器  | [http://projects.spring.io/spring-framework/](http:
 Mybatis | 持久化框架 | [http://www.mybatis.org/mybatis-3/](http://www.mybatis.org/mybatis-3/)
 MyBatis Generator | mybatis自动生成代码工具 | [http://www.mybatis.org/generator/](http://www.mybatis.org/generator/)
 Druid | 阿里高性能连接池 | [http://druid.io/](http://druid.io/)
+Shiro | 权限安全框架 | [http://shiro.apache.org/](http://shiro.apache.org/)
 Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
 
 ## 开发工具
