@@ -19,5 +19,5 @@ Druid | 阿里高性能连接池 | [http://druid.io/](http://druid.io/)
 Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
 
 ## 开发工具
-- IntelliJ IDEA: 开发IDE
-- Git: 版本管理
+- IntelliJ IDEA：开发IDE
+- Git：版本管理
