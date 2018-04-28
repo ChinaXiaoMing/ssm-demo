@@ -8,6 +8,7 @@ ssm整合框架入门学习使用
 ## 更新内容
 - 2018-4-27：整合添加druid监控<br/>
 - 2018-4-28：整合添加mybaits-generator代码自动生成功能
+- 2018-4-28：整合shiro(未完善)
 
 ## 技术选型
 技术 | 名称 | 官网
@@ -24,3 +25,5 @@ Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org
 
 ## 本地开发运行部署
 下载zip直接解压或安装git后执行克隆命令 `git clone https://github.com/ChinaXiaoMing/ssm-demo.git`
+数据库工具执行`test.sql`建立数据库及添加简单测试数据
+部署到tomcat服务器
