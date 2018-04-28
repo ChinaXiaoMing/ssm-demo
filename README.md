@@ -1,0 +1,20 @@
+# ssm-demo
+[![License](http://img.shields.io/badge/license-apache%202-brightgreen.svg)](https://github.com/ChinaXiaoMing/dubbo_demo/blob/master/LICENSE)
+[![](https://img.shields.io/badge/Author-fuyuanming-orange.svg)](https://github.com/ChinaXiaoMing)
+
+## 项目介绍
+ssm整合框架入门学习使用
+
+## 更新内容
+1.整合添加druid监控 2018-4-27
+2.整合添加mybaits-generator代码自动生成功能 2018-4-28
+
+## 技术选型
+技术 | 名称 | 官网
+----|------|----
+Spring Framework | 容器  | [http://projects.spring.io/spring-framework/](http://projects.spring.io/spring-framework/)
+Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
+
+## 开发工具
+- IntelliJ IDEA: 开发IDE
+- Git: 版本管理
