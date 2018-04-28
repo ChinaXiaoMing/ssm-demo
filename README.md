@@ -26,5 +26,5 @@ Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org
 
 ## 本地开发运行部署
 下载zip直接解压或安装git后执行克隆命令 `git clone https://github.com/ChinaXiaoMing/ssm-demo.git`
-数据库工具执行`test.sql`建立数据库及添加简单测试数据
+数据库工具执行`test.sql`建立数据库及添加简单测试数据<br/>
 部署到tomcat服务器
