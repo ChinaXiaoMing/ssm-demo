@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!-- shiro过滤器 -->
+  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    <property name="securityManager" ref="securityManager"/>
+    <property name="loginUrl" value="/login"/>
+    <property name="unauthorizedUrl" value="/unauthrized"/>
+    <property name="filterChainDefinitions">
+      <value>
+        / = anno
+        /login = anno
+        /loginSubmit = anno
+        /* = authc
+      </value>
+    </property>
+  </bean>
+
+  <!-- shiro安全管理器 -->
+  <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <property name="realm" ref="customRealm"/>
+  </bean>
+
+  <!-- 自定义realm -->
+  <bean id="customRealm" class="com.nexwise.entity.realm.CustomRealm">
+
+  </bean>
+</beans>
