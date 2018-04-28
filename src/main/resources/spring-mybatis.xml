@@ -21,6 +21,7 @@
   <!-- spring mybatis整合 -->
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource"/>
+    <property name="mapperLocations" value="classpath:mappers/*.xml"/>
   </bean>
 
   <!-- 事务管理器 -->

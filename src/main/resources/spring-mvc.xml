@@ -12,7 +12,7 @@
 
   <!-- 配置jsp -->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB_INF/jsp"/>
+    <property name="prefix" value="jsp/"/>
     <property name="suffix" value=".jsp"/>
   </bean>
 
