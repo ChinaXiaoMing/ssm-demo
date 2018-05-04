@@ -1,17 +1,21 @@
 package com.nexwise.entity.realm;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import com.nexwise.dao.UsersMapper;
+import com.nexwise.entity.Users;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 自定义Realm
  */
 public class CustomRealm extends AuthorizingRealm {
+
+    @Autowired
+    UsersMapper usersMapper;
+
     /**
      * 授权方法
      * @param principalCollection
@@ -31,12 +35,21 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
-        //获取用户名称
+        //从主体传过来认证信息中，获取用户名
         String username = (String) authenticationToken.getPrincipal();
+        //获取主体密码
+        String password1 = new String((char[]) authenticationToken.getCredentials());
+        //通过用户名到数据库中获取凭证
+        Users users = usersMapper.selectUserByUsername(username);
+        if (users == null) {
+            throw new UnknownAccountException("账号不存在");
+        }
+        String password = users.getPassword();
+        if (!password1.equals(password)) {
+            throw new IncorrectCredentialsException("密码错误");
+        }
 
-        String password = new String((char[]) authenticationToken.getCredentials());
-
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(users, password1, getName());
 
         return simpleAuthenticationInfo;
     }

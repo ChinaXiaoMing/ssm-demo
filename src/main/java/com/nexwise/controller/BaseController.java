@@ -2,6 +2,10 @@ package com.nexwise.controller;
 
 import com.nexwise.entity.Users;
 import com.nexwise.service.UsersService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,16 +47,18 @@ public class BaseController {
     @ResponseBody
     public String loginMethod(Users users) {
         //获取主体
+        Subject subject = SecurityUtils.getSubject();
         Users users1 = usersService.selectUserByUsername(users.getUsername());
-        if (users1 != null) {
-            if (users.getPassword().equals(users1.getPassword())) {
-                return "登录成功";
-            } else {
-                return "密码错误";
-            }
-        } else {
+        if (users1 == null) {
             return "账号不存在";
         }
+        UsernamePasswordToken token = new UsernamePasswordToken(users1.getUsername(), users1.getPassword());
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            e.getMessage();
+        }
+        return "登录成功";
     }
 
 }

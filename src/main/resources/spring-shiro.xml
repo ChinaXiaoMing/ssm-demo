@@ -9,9 +9,9 @@
     <property name="unauthorizedUrl" value="/unauthrized"/>
     <property name="filterChainDefinitions">
       <value>
-        / = anno
-        /login = anno
-        /loginSubmit = anno
+        /login = anon
+        /loginSubmit = anon
+        /unauthrized = anon
         /* = authc
       </value>
     </property>
@@ -23,7 +23,5 @@
   </bean>
 
   <!-- 自定义realm -->
-  <bean id="customRealm" class="com.nexwise.entity.realm.CustomRealm">
-
-  </bean>
+  <bean id="customRealm" class="com.nexwise.entity.realm.CustomRealm"/>
 </beans>
