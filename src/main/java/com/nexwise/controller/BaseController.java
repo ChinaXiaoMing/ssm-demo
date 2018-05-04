@@ -2,10 +2,13 @@ package com.nexwise.controller;
 
 import com.nexwise.entity.Users;
 import com.nexwise.service.UsersService;
+import com.nexwise.util.EncryptUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +51,8 @@ public class BaseController {
     public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), users.getPassword());
+        String encryptPassword = EncryptUtil.encryptPasswordMethod(users.getPassword(), users.getUsername());
+        UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         try {
             subject.login(token);
             return "登录成功";
