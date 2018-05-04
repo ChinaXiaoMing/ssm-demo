@@ -37,19 +37,20 @@ public class CustomRealm extends AuthorizingRealm {
 
         //从主体传过来认证信息中，获取用户名
         String username = (String) authenticationToken.getPrincipal();
+        System.out.println(username);
         //获取主体密码
-        String password1 = new String((char[]) authenticationToken.getCredentials());
+        String password = new String((char[]) authenticationToken.getCredentials());
+        System.out.println(password);
         //通过用户名到数据库中获取凭证
         Users users = usersMapper.selectUserByUsername(username);
+        System.out.println(users);
         if (users == null) {
             throw new UnknownAccountException("账号不存在");
         }
-        String password = users.getPassword();
-        if (!password1.equals(password)) {
+        if (!password.equals(users.getPassword())) {
             throw new IncorrectCredentialsException("密码错误");
         }
-
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(users, password1, getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(users, password, getName());
 
         return simpleAuthenticationInfo;
     }

@@ -48,17 +48,13 @@ public class BaseController {
     public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
-        Users users1 = usersService.selectUserByUsername(users.getUsername());
-        if (users1 == null) {
-            return "账号不存在";
-        }
-        UsernamePasswordToken token = new UsernamePasswordToken(users1.getUsername(), users1.getPassword());
+        UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), users.getPassword());
         try {
             subject.login(token);
+            return "登录成功";
         } catch (AuthenticationException e) {
-            e.getMessage();
+            return e.getMessage();
         }
-        return "登录成功";
     }
 
 }
