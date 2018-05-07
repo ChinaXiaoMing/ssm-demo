@@ -51,7 +51,8 @@ public class BaseController {
     public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
-        String encryptPassword = EncryptUtil.encryptPasswordMethod(users.getPassword(), users.getUsername());
+        String encryptPassword = EncryptUtil.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
+        System.out.println(encryptPassword);
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         try {
             subject.login(token);
