@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-04-28 17:17:43
+Date: 2018-05-07 09:11:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'xiaoming', '123456');
+INSERT INTO `users` VALUES ('1', 'xiaoming', '91eb4a5cd144eb562def5aa14ebcab91');
 
 -- ----------------------------
 -- Table structure for user_roles
