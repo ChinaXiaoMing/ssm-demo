@@ -6,13 +6,17 @@ import com.nexwise.util.EncryptUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @Descript 业务控制类
+ * @Author fuyuanming
+ * @Date 2018-05-07 10:01:40
+ * @Version 1.0
+ */
 @Controller
 public class BaseController {
 
@@ -33,6 +37,11 @@ public class BaseController {
         return "login";
     }
 
+    @GetMapping("success")
+    public String toSuccessPage() {
+        return "success";
+    }
+
     /**
      * 跳转到认证失败页面
      * @return
@@ -47,17 +56,19 @@ public class BaseController {
      * @return
      */
     @PostMapping(value = "loginSubmit", produces = "application/json;charset=utf8")
-    @ResponseBody
     public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
         String encryptPassword = EncryptUtil.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         try {
+            System.out.println(subject.getSession().getId());
+            System.out.println(subject.getSession().getHost());
+            System.out.println(subject.getSession().getTimeout());
             subject.login(token);
-            return "登录成功";
+            return "redirect:/success";
         } catch (AuthenticationException e) {
-            return e.getMessage();
+            return "redirect:/unanthrized";
         }
     }
 

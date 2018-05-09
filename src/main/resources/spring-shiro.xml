@@ -2,16 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
   <!-- shiro过滤器 -->
   <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     <property name="securityManager" ref="securityManager"/>
     <property name="loginUrl" value="/login"/>
+    <property name="successUrl" value="/success"/>
     <property name="unauthorizedUrl" value="/unauthrized"/>
     <property name="filterChainDefinitions">
       <value>
         /login = anon
         /loginSubmit = anon
         /unauthrized = anon
+        /static/* = anon
         /* = authc
       </value>
     </property>
@@ -20,8 +23,37 @@
   <!-- shiro安全管理器 -->
   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
     <property name="realm" ref="customRealm"/>
+    <property name="sessionManager" ref="sessionManager"/>
   </bean>
 
   <!-- 自定义realm -->
   <bean id="customRealm" class="com.nexwise.entity.realm.CustomRealm"/>
+
+  <!-- shiro会话管理器 -->
+  <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+    <!-- session过期时间（10分钟） -->
+    <property name="globalSessionTimeout" value="600000"/>
+    <!-- 清除无效session -->
+    <property name="deleteInvalidSessions" value="true"/>
+    <property name="sessionDAO" ref="sessionDAO"/>
+    <property name="sessionIdCookie" ref="simpleCookie"/>
+    <property name="sessionIdCookieEnabled" value="true"/>
+  </bean>
+
+  <!-- 配置session DAO的操作处理 -->
+  <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+    <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+  </bean>
+
+  <!-- session Id生成管理器 -->
+  <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+  <!-- cookie操作 -->
+  <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <constructor-arg value="mldn-session-id"/>
+    <property name="httpOnly" value="true"/>
+    <!-- cookie过期时间，-1表示关闭浏览器cookie失效 -->
+    <property name="maxAge" value="-1"/>
+  </bean>
+
 </beans>

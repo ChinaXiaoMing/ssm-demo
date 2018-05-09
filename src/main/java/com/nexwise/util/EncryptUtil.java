@@ -4,7 +4,10 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
 /**
- * 加密工具类
+ * @Descript 加密工具类
+ * @Author fuyuanming
+ * @Date 2018-05-07 10:03:39
+ * @Version 1.0
  */
 public class EncryptUtil {
     //盐值
