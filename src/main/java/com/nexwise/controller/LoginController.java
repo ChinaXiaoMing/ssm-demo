@@ -5,28 +5,29 @@ import com.nexwise.service.UsersService;
 import com.nexwise.util.EncryptUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @Descript 业务控制类
+ * @Descript 登录操作控制层
  * @Author fuyuanming
  * @Date 2018-05-07 10:01:40
  * @Version 1.0
  */
 @Controller
-public class BaseController {
+public class LoginController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     UsersService usersService;
-
-    @RequestMapping(value = "/hi", method = RequestMethod.GET)
-    public String sayHi() {
-        return "hello";
-    }
 
     /**
      * 跳转到登录页面
@@ -37,7 +38,7 @@ public class BaseController {
         return "login";
     }
 
-    @GetMapping("success")
+    @GetMapping("/success")
     public String toSuccessPage() {
         return "success";
     }
@@ -53,22 +54,26 @@ public class BaseController {
 
     /**
      * 登录认证
+     * @param users 前端用户登录信息
      * @return
      */
-    @PostMapping(value = "loginSubmit", produces = "application/json;charset=utf8")
+    @PostMapping(value = "/loginSubmit")
+    @ResponseBody
     public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
         String encryptPassword = EncryptUtil.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         try {
-            System.out.println(subject.getSession().getId());
-            System.out.println(subject.getSession().getHost());
-            System.out.println(subject.getSession().getTimeout());
+            //登录认证
             subject.login(token);
-            return "redirect:/success";
-        } catch (AuthenticationException e) {
-            return "redirect:/unanthrized";
+            return "success";
+        } catch (UnknownAccountException e) { //账号不存在
+            return "unknownAccount";
+        } catch (IncorrectCredentialsException e) { //密码错误
+            return "passwordError";
+        } catch (AuthenticationException e) { //其他认证错误
+            return "unknownException";
         }
     }
 
