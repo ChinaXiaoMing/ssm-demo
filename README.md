@@ -15,7 +15,7 @@ ssm整合框架入门学习使用
 - 整合shiro session
 
 ## 技术选型
-# 后端技术
+### 后端技术
 技术 | 名称 | 官网
 ----|------|----
 Spring Framework | 容器  | [http://projects.spring.io/spring-framework/](http://projects.spring.io/spring-framework/)
@@ -25,7 +25,7 @@ Druid | 阿里高性能连接池 | [http://druid.io/](http://druid.io/)
 Shiro | 权限安全框架 | [http://shiro.apache.org/](http://shiro.apache.org/)
 Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
 
-# 前端技术
+### 前端技术
 
 ## 开发工具
 - IntelliJ IDEA：开发IDE
