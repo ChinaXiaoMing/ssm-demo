@@ -26,6 +26,12 @@ Shiro | 权限安全框架 | [http://shiro.apache.org/](http://shiro.apache.org/
 Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
 
 ### 前端技术
+技术 | 名称 | 官网
+----|------|----
+Layer | 弹出层控件 | [http://layer.layui.com/](http://layer.layui.com/)
+jQuery | JavaScript封装库 | [http://jquery.com/](http://jquery.com/)
+jQuery Validation | jQuery表单验证 | [https://jqueryvalidation.org/](https://jqueryvalidation.org/)
+
 
 ## 开发工具
 - IntelliJ IDEA：开发IDE
