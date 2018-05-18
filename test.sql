@@ -10,10 +10,36 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-05-07 09:11:35
+Date: 2018-05-18 17:11:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for login_log
+-- ----------------------------
+DROP TABLE IF EXISTS `login_log`;
+CREATE TABLE `login_log` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '登录日志id',
+  `login_name` varchar(64) NOT NULL COMMENT '登录账号',
+  `ip` varchar(64) NOT NULL COMMENT '登录IP',
+  `login_status` int(2) NOT NULL COMMENT '登录状态（1：成功，0：失败）',
+  `login_time` datetime NOT NULL COMMENT '登录时间',
+  `spend_time` bigint(32) NOT NULL COMMENT '登录耗时（单位：ms）',
+  `browser_name` varchar(64) DEFAULT NULL COMMENT '浏览器名称',
+  `browser_type` varchar(64) DEFAULT NULL COMMENT '浏览器类型',
+  `browser_version` varchar(64) DEFAULT NULL,
+  `operation_system` varchar(64) DEFAULT NULL COMMENT '操作系统',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of login_log
+-- ----------------------------
+INSERT INTO `login_log` VALUES ('2', 'xiaoming', '127.0.0.1', '1', '2018-05-18 17:04:51', '327', 'Chrome', 'Browser', '65.0.3325.181', 'Windows 10', null);
+INSERT INTO `login_log` VALUES ('3', 'xiaoming', '127.0.0.1', '1', '2018-05-18 17:05:18', '2', 'Chrome', 'Browser', '65.0.3325.181', 'Windows 10', null);
+INSERT INTO `login_log` VALUES ('4', 'xiaoming', '127.0.0.1', '1', '2018-05-18 17:06:57', '6', 'Chrome', 'Browser', '65.0.3325.181', 'Windows 10', null);
 
 -- ----------------------------
 -- Table structure for roles_permissions

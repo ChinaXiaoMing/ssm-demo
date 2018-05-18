@@ -31,11 +31,10 @@
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
     <!-- 不生成实体使用案例 -->
-    <table tableName="users" domainObjectName="Users"
+    <table tableName="login_log" domainObjectName="LoginLog"
             enableCountByExample="false" enableUpdateByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             selectByExampleQueryId="false">
-      <generatedKey column="ID" sqlStatement="selectuuid_short()" identity="false"/>
     </table>
   </context>
 </generatorConfiguration>

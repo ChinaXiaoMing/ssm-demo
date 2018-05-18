@@ -2,7 +2,7 @@ package com.nexwise.controller;
 
 import com.nexwise.entity.Users;
 import com.nexwise.service.UsersService;
-import com.nexwise.util.EncryptUtil;
+import com.nexwise.utils.EncryptUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -62,7 +62,7 @@ public class LoginController {
     public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
-        String encryptPassword = EncryptUtil.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
+        String encryptPassword = EncryptUtils.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         try {
             //登录认证
