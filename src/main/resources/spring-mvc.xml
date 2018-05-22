@@ -19,8 +19,7 @@
   <aop:aspectj-autoproxy/>
 
   <!-- 静态资源访问 -->
-  <mvc:resources mapping="/static/**" location="/static/"/>
-  <mvc:resources mapping="/WEB-INF/pages/**" location="/WEB-INF/pages/"/>
+  <mvc:default-servlet-handler/>
 
   <!-- 配置jsp -->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

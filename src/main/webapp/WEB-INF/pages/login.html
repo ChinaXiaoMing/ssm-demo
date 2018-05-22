@@ -2,12 +2,12 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>系统登录</title>
-  <link rel="stylesheet" type="text/css" href="/static/css/login.css">
-  <script type="text/javascript" src="/static/js/jquery.js"></script>
-  <script type="text/javascript" src="/static/js/jquery.form.js"></script>
-  <script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
-  <script type="text/javascript" src="/static/js/messages_zh.js"></script>
-  <script type="text/javascript" src="/static/js/layer/layer.js"></script>
+  <link rel="stylesheet" type="text/css" href="./static/css/login.css">
+  <script type="text/javascript" src="./static/js/jquery.js"></script>
+  <script type="text/javascript" src="./static/js/jquery.form.js"></script>
+  <script type="text/javascript" src="./static/js/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="./static/js/messages_zh.js"></script>
+  <script type="text/javascript" src="./static/js/layer/layer.js"></script>
   <script type="text/javascript">
       $(function () {
           $(".screenbg ul li").each(function () {
@@ -53,13 +53,14 @@
 
           $("#submitId").click(function () {
               if ($("#formId").valid()) {
+                  var path = getContextPath();
                   $.ajax({
                       type: 'post',
-                      url: '/loginSubmit',
+                      url: path + '/loginSubmit',
                       data: $("#formId").serialize(),
                       success: function (data) {
                           if (data == "success") {
-                              window.location.href = "/success";
+                              window.location.href = path + "/success";
                           } else if (data == "unknownAccount") {
                               layer.msg('账号不存在', {
                                  offset: '65px'
@@ -80,6 +81,14 @@
                   });
               }
           });
+
+          function getContextPath(){
+              var pathName = document.location.pathname;
+              var index = pathName.substr(1).indexOf("/");
+              var result = pathName.substr(0,index+1);
+              return result;
+          }
+
       });
   </script>
 </head>
@@ -102,7 +111,7 @@
       <label>验证码：</label>
       <input type="text" name="" maxlength="4" id="code" tabindex="3"/>
       <div class="codeImg">
-        <img src="/static/images/captcha.jpeg.jpg"/>
+        <img src="./static/images/captcha.jpeg.jpg"/>
       </div>
     </div>
     <div class="remember">
@@ -119,9 +128,9 @@
 
 <div class="screenbg">
   <ul>
-    <li><a href="javascript:void(0);"><img src="/static/images/3.jpg"></a></li>
-    <li><a href="javascript:void(0);"><img src="/static/images/4.jpg"></a></li>
-    <li><a href="javascript:void(0);"><img src="/static/images/5.jpg"></a></li>
+    <li><a href="javascript:void(0);"><img src="./static/images/3.jpg"></a></li>
+    <li><a href="javascript:void(0);"><img src="./static/images/4.jpg"></a></li>
+    <li><a href="javascript:void(0);"><img src="./static/images/5.jpg"></a></li>
   </ul>
 </div>
 
