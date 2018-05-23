@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/Author-fuyuanming-orange.svg)](https://github.com/ChinaXiaoMing)
 
 ## 项目介绍
-ssm整合框架入门学习使用
+ssm整合框架入门学习使用，从零开始，重复造个轮子。
 
 ## 更新内容
 - 2018-4-27：整合添加druid监控<br/>
@@ -12,9 +12,9 @@ ssm整合框架入门学习使用
 - 2018-5-9：加入登录页
 - 2018-5-16 完善登录功能
 - 2018-5-18 整合aop,添加登录日志功能
+- 2018-5-23 添加Kaptcha验证码功能
 
 ## 计划
-- 验证码开发
 - 后台主页开发
 
 ## 技术选型
@@ -26,6 +26,7 @@ Mybatis | 持久化框架 | [http://www.mybatis.org/mybatis-3/](http://www.mybat
 MyBatis Generator | mybatis自动生成代码工具 | [http://www.mybatis.org/generator/](http://www.mybatis.org/generator/)
 Druid | 阿里高性能连接池 | [http://druid.io/](http://druid.io/)
 Shiro | 权限安全框架 | [http://shiro.apache.org/](http://shiro.apache.org/)
+Kaptcha | 验证码 | [https://github.com/penggle/kaptcha](https://github.com/penggle/kaptcha)
 Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
 
 ### 前端技术
