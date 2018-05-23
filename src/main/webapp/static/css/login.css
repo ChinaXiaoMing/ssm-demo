@@ -26,3 +26,5 @@ input:focus{outline:none;box-shadow:0 2px 3px 0 rgba(0,0,0,.1) inset,0 2px 7px 0
 .bottom{margin:8px auto 0 auto;width:100%;position:fixed;text-align:center;bottom:0;left:0;overflow:hidden;padding-bottom:8px;color:#ccc;word-spacing:3px;zoom:1;}
 .bottom a{color:#FFF;text-decoration:none;}
 .bottom a:hover{text-decoration:underline;}
+
+.error{color: red;}
