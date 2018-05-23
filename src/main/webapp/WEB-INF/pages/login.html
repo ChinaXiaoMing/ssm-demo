@@ -50,7 +50,7 @@
                  }
              }
           });
-
+          //点击登录
           $("#submitId").click(function () {
               if ($("#formId").valid()) {
                   var path = getContextPath();
@@ -69,8 +69,12 @@
                               layer.msg('密码错误', {
                                   offset: '65px'
                               });
+                          } else if (data == "captchaError") {
+                              layer.msg('验证码错误', {
+                                  offset: '65px'
+                              });
                           } else {
-                              layer.msg('认证错误', {
+                              layer.msg('未知错误', {
                                   offset: '65px'
                               });
                           }
@@ -81,13 +85,17 @@
                   });
               }
           });
-
+          //获取项目名路径
           function getContextPath(){
               var pathName = document.location.pathname;
               var index = pathName.substr(1).indexOf("/");
               var result = pathName.substr(0,index+1);
               return result;
           }
+          //点击图片更换验证码
+          $("#captchaImg").click(function () {
+              $(this).attr('src', './static/images/captcha.jpeg.jpg?' + Math.floor(Math.random() * 100));
+          });
 
       });
   </script>
@@ -109,9 +117,9 @@
     </div>
     <div class="code">
       <label>验证码：</label>
-      <input type="text" name="" maxlength="4" id="code" tabindex="3"/>
+      <input type="text" name="captcha" maxlength="6" id="code" tabindex="3" autocomplete="off"/>
       <div class="codeImg">
-        <img src="./static/images/captcha.jpeg.jpg"/>
+        <img id="captchaImg" src="./static/images/captcha.jpeg.jpg"/>
       </div>
     </div>
     <div class="remember">

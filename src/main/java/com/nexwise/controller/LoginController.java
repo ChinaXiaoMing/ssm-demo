@@ -1,5 +1,6 @@
 package com.nexwise.controller;
 
+import com.google.code.kaptcha.Constants;
 import com.nexwise.entity.Users;
 import com.nexwise.service.UsersService;
 import com.nexwise.utils.EncryptUtils;
@@ -14,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Descript 登录操作控制层
@@ -59,15 +62,21 @@ public class LoginController {
      */
     @PostMapping(value = "/loginSubmit")
     @ResponseBody
-    public String loginMethod(Users users) {
+    public String loginMethod(Users users, @RequestParam("captcha") String captcha) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
         String encryptPassword = EncryptUtils.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
+        //获取Kaptcha验证码
+        String kaptchaCode = (String) subject.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         try {
             //登录认证
             subject.login(token);
-            return "success";
+            if (kaptchaCode.equals(captcha)) {
+                return "success";  //登录成功
+            } else {
+                return "captchaError"; //验证码错误
+            }
         } catch (UnknownAccountException e) { //账号不存在
             return "unknownAccount";
         } catch (IncorrectCredentialsException e) { //密码错误
