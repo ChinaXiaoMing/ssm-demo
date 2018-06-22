@@ -16,6 +16,7 @@ ssm整合框架入门学习使用，从零开始，重复造个轮子。
 - 2018-5-16 完善登录功能
 - 2018-5-18 整合aop,添加登录日志功能
 - 2018-5-23 添加Kaptcha验证码功能
+- 2018-6-22 整合FreeMarker
 
 ## 计划
 - 后台主页开发
@@ -31,6 +32,7 @@ Druid | 阿里高性能连接池 | [http://druid.io/](http://druid.io/)
 Shiro | 权限安全框架 | [http://shiro.apache.org/](http://shiro.apache.org/)
 Kaptcha | 验证码 | [https://github.com/penggle/kaptcha](https://github.com/penggle/kaptcha)
 Maven | 项目构建工具  | [http://maven.apache.org/](http://maven.apache.org/)
+FreeMarker | 模板引擎 | [https://freemarker.apache.org/](https://freemarker.apache.org/)
 
 ### 前端技术
 技术 | 名称 | 官网
