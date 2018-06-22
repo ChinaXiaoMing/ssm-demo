@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +38,19 @@ public class LoginController {
      * @return
      */
     @GetMapping(value = {"/", "/login"})
-    public String toLoginPage() {
+    public String toLoginPage(Model model) {
+        model.addAttribute("name", "hello world");
         return "login";
     }
 
     @GetMapping("/success")
     public String toSuccessPage() {
         return "success";
+    }
+
+    @GetMapping(value = "/index")
+    public String toIndexPage() {
+        return "index";
     }
 
     /**
@@ -72,11 +79,12 @@ public class LoginController {
         try {
             //登录认证
             subject.login(token);
-            if (kaptchaCode.equals(captcha)) {
-                return "success";  //登录成功
-            } else {
-                return "captchaError"; //验证码错误
-            }
+            return "success";
+//            if (kaptchaCode.equals(captcha)) {
+//                return "success";  //登录成功
+//            } else {
+//                return "captchaError"; //验证码错误
+//            }
         } catch (UnknownAccountException e) { //账号不存在
             return "unknownAccount";
         } catch (IncorrectCredentialsException e) { //密码错误

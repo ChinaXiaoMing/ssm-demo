@@ -21,11 +21,16 @@
   <!-- 静态资源访问 -->
   <mvc:default-servlet-handler/>
 
-  <!-- 配置jsp -->
-  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/pages/"/>
-    <property name="suffix" value=".html"/>
+  <!-- FreeMarker Configuration -->
+  <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <property name="templateLoaderPath" value="/WEB-INF/pages/"/>
+    <property name="defaultEncoding" value="UTF-8"/>
   </bean>
 
+  <!-- 配置FreeMarker视图 -->
+  <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <property name="contentType" value="text/html; charset=utf-8"/>
+    <property name="suffix" value=".html"/>
+  </bean>
 
 </beans>

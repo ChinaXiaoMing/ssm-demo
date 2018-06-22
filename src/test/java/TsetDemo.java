@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @Descript 测试环境
@@ -9,24 +10,8 @@ import java.util.List;
  */
 public class TsetDemo {
 
-    public static void main(String[] args) throws CloneNotSupportedException {
+    public static void main(String[] args) {
 
-        long start = System.currentTimeMillis();
-        Object object = new Object();
-        List<Object> list = new ArrayList<Object>();
-        int N = 10000;
-        for (int i = 0; i < N; i++) {
-            list.add(object);
-        }
-        System.out.println(System.currentTimeMillis() - start);
-
-        long start2 = System.currentTimeMillis();
-        List<Object> list2 = new ArrayList<Object>();
-        ((ArrayList<Object>) list2).ensureCapacity(N);
-        for (int i = 0; i < N; i++) {
-            list.add(object);
-        }
-        System.out.println(System.currentTimeMillis() - start2);
 
 
     }

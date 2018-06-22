@@ -3,6 +3,8 @@ package com.nexwise.dao;
 import com.nexwise.entity.Users;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UsersMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,6 +16,8 @@ public interface UsersMapper {
     Users selectByPrimaryKey(Integer id);
 
     Users selectUserByUsername(String username);
+
+    List<Users> getUserList();
 
     int updateByPrimaryKeySelective(Users record);
 

@@ -60,7 +60,7 @@
                       data: $("#formId").serialize(),
                       success: function (data) {
                           if (data == "success") {
-                              window.location.href = path + "/success";
+                              window.location.href = path + "/index";
                           } else if (data == "unknownAccount") {
                               layer.msg('账号不存在', {
                                  offset: '65px'
@@ -132,7 +132,7 @@
   </form>
 </div>
 
-<div class="bottom">©2018 China <a href="javascript:void(0);" target="_blank">关于</a> <span>粤ICP证xxxxx号</span></div>
+<div class="bottom">©2018 China <a href="javascript:void(0);" target="_blank">关于</a> <span>粤ICP证xxxxx号${name}</span></div>
 
 <div class="screenbg">
   <ul>
