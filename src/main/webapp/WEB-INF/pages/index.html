@@ -3,43 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>主页</title>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./static/js/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="./static/js/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="./static/js/metisMenu/metisMenu.css">
   <link rel="stylesheet" type="text/css" href="./static/js/metisMenu/demo.css">
   <link rel="stylesheet" type="text/css" href="./static/js/metisMenu/mini.css">
+  <link rel="stylesheet" type="text/css" href="./static/js/layui/css/layui.css">
   <script type="text/javascript" src="./static/js/jquery.js"></script>
-  <script type="text/javascript" src="./static/js/bootstrap.js"></script>
+  <script type="text/javascript" src="./static/js/layui/layui.js"></script>
+  <script type="text/javascript" src="./static/js/bootstrap/js/bootstrap.js"></script>
   <script type="text/javascript" src="./static/js/metisMenu/metisMenu.js"></script>
   <script type="text/javascript">
     $(function () {
         $("#menu").metisMenu();
+        layui.use('element', function(){
+            var element = layui.element;
+        });
     });
   </script>
 </head>
 <body>
-<#include "/common/common.html">
 <div class="clearfix">
   <aside class="sidebar">
     <nav class="sidebar-nav">
       <ul class="metismenu" id="menu">
         <li class="active">
           <a href="#" aria-expanded="true">
-            <span class="sidebar-nav-item-icon fa fa-github fa-lg"></span>
-            <span class="sidebar-nav-item">metisMenu</span>
-            <span class="fa arrow"></span>
+            <span class="fa fa-cog fa-lg"></span>
+            <span class="sidebar-nav-item">系统管理</span>
+            <span class="glyphicon arrow"></span>
           </a>
           <ul aria-expanded="true">
             <li>
               <a href="javascript:void(0);">
-                <span class="sidebar-nav-item-icon fa fa-code-fork"></span>
-                Fork
+                <span class="fa fa-user"></span>
+                <span class="sidebar-nav-item">用户管理</span>
               </a>
             </li>
             <li>
               <a href="javascript:void(0);">
-                <span class="sidebar-nav-item-icon fa fa-star"></span>
-                Star
+                <span class="fa fa-navicon"></span>
+                <span class="sidebar-nav-item">菜单管理</span>
               </a>
             </li>
             <li>
@@ -51,7 +55,11 @@
           </ul>
         </li>
         <li>
-          <a href="#" aria-expanded="false">Menu 0 <span class="fa arrow"></span></a>
+          <a href="#" aria-expanded="false">
+            <span class="fa fa-cog fa-lg"></span>
+            <span class="sidebar-nav-item">系统管理</span>
+            <span class="glyphicon arrow"></span>
+          </a>
           <ul aria-expanded="false">
             <li><a href="#">item 0.1</a></li>
             <li><a href="#">item 0.2</a></li>
@@ -60,7 +68,7 @@
           </ul>
         </li>
         <li>
-          <a href="#" aria-expanded="false">Menu 1 <span class="glyphicon arrow"></span></a>
+          <a href="#" aria-expanded="false">系统管理 <span class="glyphicon arrow"></span></a>
           <ul aria-expanded="false">
             <li><a href="#">item 1.1</a></li>
             <li><a href="#">item 1.2</a></li>
@@ -97,5 +105,23 @@
       </ul>
     </nav>
   </aside>
+</div>
+<div>
+  <ul class="layui-nav">
+    <li class="layui-nav-item">
+      <a href="">控制台<span class="layui-badge">9</span></a>
+    </li>
+    <li class="layui-nav-item">
+      <a href="">个人中心<span class="layui-badge-dot"></span></a>
+    </li>
+    <li class="layui-nav-item">
+      <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
+      <dl class="layui-nav-child">
+        <dd><a href="javascript:;">修改密码</a></dd>
+        <dd><a href="javascript:;">安全退出</a></dd>
+      </dl>
+    </li>
+  </ul>
+</div>
 </body>
 </html>
