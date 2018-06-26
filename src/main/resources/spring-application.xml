@@ -12,5 +12,7 @@
   <import resource="spring-mybatis.xml"/>
   <!-- 引入spring shiro整合配置文件 -->
   <import resource="spring-shiro.xml"/>
+  <!-- 引入spring activemq整合配置文件 -->
+  <import resource="spring-activemq.xml"/>
 
 </beans>

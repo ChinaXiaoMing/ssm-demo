@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:annotation-config/>
+
+  <!-- activemq连接工厂 -->
+  <amq:connectionFactory id="activemqConnectionFactory" brokerURL="tcp://127.0.0.1:61616" userName="admin" password="admin"></amq:connectionFactory>
+
+  <!-- spring连接工厂，管理activemq连接工厂 -->
+  <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+    <property name="targetConnectionFactory" ref="activemqConnectionFactory"/>
+    <property name="sessionCacheSize" value="100"/>
+  </bean>
+
+  <!-- 创建一个消息队列目的地-->
+  <bean id="xiaomingQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg value="xiaoming.queue"/>
+  </bean>
+
+  <!-- 生产者 -->
+  <bean class="com.nexwise.service.impl.ProduceServiceImpl"/>
+
+  <!-- 消息队列JmsTemplate，消息生产者 -->
+  <bean id="queueJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="connectionFactory"/>
+    <property name="defaultDestination" ref="xiaomingQueueDestination"/>
+    <property name="receiveTimeout" value="10000"/>
+    <!-- 非pub/sub（发布/订阅）模式，即消息队列模式 -->
+    <property name="pubSubDomain" value="false"/>
+  </bean>
+
+  <!-- 主题目的的 -->
+  <bean id="xiaomingTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+    <constructor-arg value="xiaoming.topic"/>
+  </bean>
+
+  <!-- 主题JmsTemplate -->
+  <bean id="topicJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="connectionFactory"/>
+    <property name="defaultDestination" ref="xiaomingTopicDestination"/>
+    <property name="pubSubDomain" value="true"/>
+  </bean>
+
+  <!-- 消息监听器 -->
+  <bean id="consumerMessageListener" class="com.nexwise.service.ConsumerMessageListener"/>
+
+  <!-- jms消息队列监听容器 -->
+  <bean id="listenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="connectionFactory"/>
+    <property name="destination" ref="xiaomingTopicDestination"/>
+    <property name="messageListener" ref="consumerMessageListener"/>
+    <property name="concurrentConsumers" value="2"/>
+  </bean>
+
+</beans>
