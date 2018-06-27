@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -12,7 +13,8 @@ public class TsetDemo {
 
     public static void main(String[] args) {
 
-
+        Optional<String> optional = Optional.ofNullable("xiaoming");
+        System.out.println(optional.get());
 
     }
 

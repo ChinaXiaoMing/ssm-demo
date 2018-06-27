@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 /**
  * @Descript 学生类
  * @Author fuyuanming
@@ -8,6 +10,10 @@ public class Student implements Cloneable{
 
     String name;
     int age;
+
+    public Student() {
+
+    }
 
     public Student(String name, int age) {
         this.name = name;
@@ -26,4 +32,9 @@ public class Student implements Cloneable{
     protected Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
+
+    public String hello(Optional<String> name1, Optional<String> name2) {
+        return name1.get() + name2.get();
+    }
+
 }
