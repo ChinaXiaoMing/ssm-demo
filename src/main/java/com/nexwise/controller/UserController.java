@@ -5,6 +5,7 @@ import com.nexwise.entity.Users;
 import com.nexwise.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class UserController {
     public String getUserList() {
         List<Users> usersList = usersService.getUserList();
         String json = JSON.toJSONString(usersList);
+        Jedis jedis = new Jedis("47.106.88.138", 6379);
+        jedis.set("userList", json);
+        jedis.close();
         return json;
     }
 

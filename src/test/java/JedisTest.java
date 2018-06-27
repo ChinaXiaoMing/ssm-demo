@@ -6,9 +6,8 @@ public class JedisTest {
 
         Jedis jedis = new Jedis("47.106.88.138", 6379);
         //jedis.auth("123456");
-        jedis.set("hello", "world");
-        System.out.println(jedis.get("hello"));
-        System.out.println(jedis.ping());
+        System.out.println(jedis.get("userList"));
+        jedis.close();
 
     }
 
