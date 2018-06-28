@@ -3,6 +3,7 @@ package com.nexwise.controller;
 import com.alibaba.fastjson.JSON;
 import com.nexwise.entity.Users;
 import com.nexwise.service.UsersService;
+import com.nexwise.utils.JedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
@@ -30,9 +31,9 @@ public class UserController {
     public String getUserList() {
         List<Users> usersList = usersService.getUserList();
         String json = JSON.toJSONString(usersList);
-        Jedis jedis = new Jedis("47.106.88.138", 6379);
-        jedis.set("userList", json);
-        jedis.close();
+        Jedis jedis = JedisUtils.getJedis();
+        jedis.set("userList1", json);
+        JedisUtils.recycleJedis(jedis);
         return json;
     }
 

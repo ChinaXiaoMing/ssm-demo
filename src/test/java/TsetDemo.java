@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
 /**
@@ -13,8 +14,10 @@ public class TsetDemo {
 
     public static void main(String[] args) {
 
-        Optional<String> optional = Optional.ofNullable("xiaoming");
-        System.out.println(optional.get());
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("redis");
+        String host = resourceBundle.getString("redis.host");
+        int maxIdle = Integer.parseInt(resourceBundle.getString("redis.maxIdle"));
+        System.out.println(maxIdle);
 
     }
 
