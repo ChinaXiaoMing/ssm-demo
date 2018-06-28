@@ -34,7 +34,7 @@ public class JedisUtils {
         jedisPoolConfig.setMinIdle(minIdle);
         jedisPoolConfig.setMaxTotal(maxTotal);
         String host = resourceBundle.getString("redis.host"); //地址
-        int port = Integer.parseInt(resourceBundle.getString("redis.port"));
+        int port = Integer.parseInt(resourceBundle.getString("redis.port")); //端口号
         //创建Jedis连接池
         jedisPool = new JedisPool(jedisPoolConfig, host, port);
     }
