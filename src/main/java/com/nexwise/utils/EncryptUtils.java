@@ -1,5 +1,6 @@
 package com.nexwise.utils;
 
+import org.apache.commons.net.util.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
@@ -46,6 +47,23 @@ public class EncryptUtils {
     public static String saltEncryptPasswordByPasswordAndUsername(String password, String username) {
         String encryptPassword = new SimpleHash(ALGORITHM_NAME, password, ByteSource.Util.bytes(username + SALT), COUNT).toHex();
         return encryptPassword;
+    }
+
+    /**
+     * base64加密
+     * @param password 明文密码
+     * @return
+     */
+    public static String EncryptBase64(String password) {
+        return Base64.encodeBase64String(password.getBytes());
+    }
+
+    /**
+     * DES可逆加密
+     * @return
+     */
+    public static String EncryptDES() {
+        return null;
     }
 
 }

@@ -27,18 +27,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nexwise.entity.Users">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
-    </selectKey>
     insert into users (id, username, password
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.nexwise.entity.Users">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
-    </selectKey>
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       id,

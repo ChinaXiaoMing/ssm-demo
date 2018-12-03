@@ -37,4 +37,8 @@ public class Student implements Cloneable{
         return name1.get() + name2.get();
     }
 
+    public String hello() {
+        return "hello world";
+    }
+
 }
