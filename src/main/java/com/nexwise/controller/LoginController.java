@@ -71,6 +71,7 @@ public class LoginController {
     public String loginMethod(Users users, @RequestParam("captcha") String captcha) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
+        System.out.println(subject.getSession().getId());
         String encryptPassword = EncryptUtils.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         //获取Kaptcha验证码

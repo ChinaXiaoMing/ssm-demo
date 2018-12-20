@@ -14,7 +14,7 @@ public class HttpClientTest {
     public static void main(String[] args) {
 
         CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://localhost:8083/ssm-demo/user/");
+        HttpGet httpGet = new HttpGet("");
         try {
             CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpGet);
             HttpEntity httpEntity = closeableHttpResponse.getEntity();
