@@ -2,7 +2,6 @@ package com.nexwise.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.nexwise.entity.Users;
-import com.nexwise.service.UsersService;
 import com.nexwise.utils.EncryptUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,12 +11,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Descript 登录操作控制层
@@ -29,9 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
-    @Autowired
-    UsersService usersService;
 
     /**
      * 跳转到登录页面
@@ -66,13 +58,13 @@ public class LoginController {
      * @param users 前端用户登录信息
      * @return
      */
-    @PostMapping(value = "/loginSubmit")
+    @RequestMapping(value = "/loginSubmit")
     @ResponseBody
     public String loginMethod(Users users, @RequestParam("captcha") String captcha) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
-        System.out.println(subject.getSession().getId());
         String encryptPassword = EncryptUtils.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
+        System.out.println(encryptPassword);
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         //获取Kaptcha验证码
         String kaptchaCode = (String) subject.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);

@@ -145,7 +145,7 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-      <version>1.1.5</version>
+      <version>1.1.10</version>
     </dependency>
     <!-- fastjson阿里开源jsonz数据转换工具 -->
     <dependency>
@@ -269,6 +269,7 @@
           <executions>
             <execution>
               <id>Generate MyBatis Files</id>
+              <phase>deploy</phase>
               <goals>
                 <goal>generate</goal>
               </goals>

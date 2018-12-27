@@ -47,15 +47,21 @@ public class ZookeeperConnect {
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         ZookeeperConnect connect = new ZookeeperConnect();
-
         ZooKeeper zooKeeper = connect.connect();
-//        byte[] bytes = zooKeeper.getData("/FirstZnode", false, new Stat());
-//        System.out.println(new String(bytes));
 //        String path = "/FirstZnode";
 //        byte[] data = "first znode data".getBytes("utf8");
-//        List<ACL> acl = zooKeeper.getACL("/", new Stat());
-//        String success = zooKeeper.create(path, data, acl, CreateMode.PERSISTENT);
-//        System.out.println(success);
+//        byte[] data1 = "first znode data1".getBytes("utf8");
+//        List<ACL> acl = ZooDefs.Ids.OPEN_ACL_UNSAFE;
+//
+//        String success1 = null;
+//        try {
+//            String success = zooKeeper.create(path, data, acl, CreateMode.EPHEMERAL_SEQUENTIAL);
+//            success1 = zooKeeper.create(path, data1, acl, CreateMode.PERSISTENT_SEQUENTIAL);
+//            System.out.println(success);
+//            System.out.println(success1);
+//        } catch (KeeperException e) {
+//            e.printStackTrace();
+//        }
         List<String> list = zooKeeper.getChildren("/", false);
         list.stream().forEach(x -> System.out.println(x));
 //        zooKeeper.setData("/FirstZnode", "new znode data".getBytes(), zooKeeper.exists("/FirstZnode", false).getVersion());
