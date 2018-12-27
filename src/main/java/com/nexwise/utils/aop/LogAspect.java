@@ -32,6 +32,8 @@ import java.util.Date;
 @Component
 public class LogAspect {
 
+    long spendTime = 0;
+
     @Autowired
     private LoginLogService loginLogService;
 
@@ -43,22 +45,20 @@ public class LogAspect {
 
     @Around("loginLog()")
     public Object loginAround(ProceedingJoinPoint point) throws Throwable {
+        long start = System.currentTimeMillis();
         Object result = point.proceed();
-        System.out.println("执行登录操作");
+        spendTime = System.currentTimeMillis() - start;
         return result;
     }
 
     /**
-     * 登录成功后记录日志
+     * 登录后记录日志
      * @param joinPoint
      */
-    @AfterReturning("loginLog()")
-    public void loginAfter(JoinPoint joinPoint) {
-        Object[] objects  = joinPoint.getArgs();
-        if (objects.length > 0) {
-            System.out.println("登录成功！");
-            long start = System.currentTimeMillis();
-            long spendTime = System.currentTimeMillis() - start;
+    @AfterReturning(value = "loginLog()", returning = "object")
+    public void loginAfter(JoinPoint joinPoint, Object object) {
+        //登录成功后记录日志
+        if (object.toString().equals("success")) {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = attributes.getRequest();
             UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
@@ -66,10 +66,11 @@ public class LogAspect {
             Browser browser = userAgent.getBrowser();
             Users user = (Users) SecurityUtils.getSubject().getPrincipal();
             LoginLog loginLog = new LoginLog();
-            loginLog.setLoginName("xiaoming");
+            loginLog.setLoginName(user.getUsername());
             loginLog.setIp(IPUtils.getClinetIp(request));
             loginLog.setLoginTime(new Date());
             loginLog.setLoginStatus(1);
+            loginLog.setRemark("登录成功");
             loginLog.setSpendTime(spendTime);
             loginLog.setBrowserName(browser.getName());
             loginLog.setBrowserType(browser.getBrowserType().getName());
