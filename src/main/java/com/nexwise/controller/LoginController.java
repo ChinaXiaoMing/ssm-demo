@@ -60,14 +60,13 @@ public class LoginController {
      */
     @RequestMapping(value = "/loginSubmit")
     @ResponseBody
-    public String loginMethod(Users users, @RequestParam("captcha") String captcha) {
+    public String loginMethod(Users users) {
         //获取主体
         Subject subject = SecurityUtils.getSubject();
         String encryptPassword = EncryptUtils.saltEncryptPasswordByPasswordAndUsername(users.getPassword(), users.getUsername());
-        System.out.println(encryptPassword);
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), encryptPassword);
         //获取Kaptcha验证码
-        String kaptchaCode = (String) subject.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        //String kaptchaCode = (String) subject.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         try {
             //登录认证
             subject.login(token);

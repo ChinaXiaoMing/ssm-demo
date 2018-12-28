@@ -33,24 +33,42 @@
   <!-- shiro会话管理器 -->
   <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
     <property name="sessionIdUrlRewritingEnabled" value="false" />
-    <!-- session过期时间（10分钟） -->
+    <!--&lt;!&ndash; session过期时间（10分钟） &ndash;&gt;-->
     <property name="globalSessionTimeout" value="600000"/>
-    <!-- 清除无效session -->
+    <!--&lt;!&ndash; 清除无效session &ndash;&gt;-->
     <property name="deleteInvalidSessions" value="true"/>
-    <property name="sessionDAO" ref="sessionDAO"/>
+    <property name="sessionDAO" ref="redisSessionDAO"/>
+    <property name="cacheManager" ref="redisCacheManager"/>
     <property name="sessionIdCookie" ref="simpleCookie"/>
-    <property name="sessionIdCookieEnabled" value="true"/>
   </bean>
 
-  <!-- 配置session DAO的操作处理 -->
-  <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
-    <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+  <!-- =====以下配置采用shiro-redis开源插件===== -->
+  <!-- redis管理session -->
+  <bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+    <property name="redisManager" ref="redisManager"/>
   </bean>
 
-  <!-- session Id生成管理器 -->
-  <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+  <!-- redis管理器 -->
+  <bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+    <property name="host" value="${redis.host}"/>
+    <property name="jedisPoolConfig" ref="jedisPoolConfig"/>
+  </bean>
 
-  <!-- cookie操作 -->
+  <!-- jedis连接池配置 -->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <property name="maxIdle" value="${redis.maxIdle}"/>
+    <property name="minIdle" value="${redis.minIdle}"/>
+    <property name="maxTotal" value="${redis.maxTotal}"/>
+  </bean>
+
+  <!-- redis缓存管理器 -->
+  <bean id="redisCacheManager" class="org.crazycake.shiro.RedisCacheManager">
+    <property name="redisManager" ref="redisManager"/>
+    <property name="principalIdFieldName" value="id"/>
+  </bean>
+  <!-- =====结束====== -->
+
+  <!-- 自定义cookie配置 -->
   <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
     <constructor-arg value="mldn-session-id"/>
     <property name="httpOnly" value="true"/>
